@@ -404,7 +404,7 @@ public class TareaController {
             );
             ElementHandle element = page.querySelector("input[type='text']:not([type='hidden']), input[type='search']:not([type='hidden'])");
             if (element != null && element.isVisible()) {
-                System.out.println("Campo de búsqueda encontrado con JavaScript dinámico.");
+
                 return "input[type='text']:not([type='hidden']), input[type='search']:not([type='hidden'])";
             }
         } catch (Exception e) {
