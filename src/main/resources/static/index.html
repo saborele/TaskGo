@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskAssistant - Gestiona tus Tareas</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
@@ -45,12 +43,19 @@
             text-decoration: line-through;
             color: #6c757d;
         }
+        .favorite-star {
+            cursor: pointer;
+            color: #ccc;
+        }
+        .favorite-star.favorita {
+            color: #ffd700;
+        }
     </style>
 </head>
 <body>
 <div class="container mt-5">
     <h1 class="text-center mb-3"><i class="bi bi-list-task me-2"></i>TaskAssistant</h1>
-    <p class="text-center text-muted mb-4">Añade tareas y navega por la web fácilmente</p>
+    <p class="text-center text-muted mb-4">Añade tareas y ejecuta comandos fácilmente</p>
 
     <!-- Formulario para tareas -->
     <form id="task-form" class="mb-4">
@@ -62,8 +67,8 @@
     </form>
 
     <!-- Filtro de tareas -->
-    <div class="mb-3 d-flex justify-content-between">
-        <div class="w-50">
+    <div class="mb-3 d-flex justify-content-between align-items-end">
+        <div class="w-50 me-2">
             <label for="task-filter" class="form-label">Filtrar Tareas</label>
             <select id="task-filter" class="form-select">
                 <option value="all">Todas</option>
@@ -71,9 +76,15 @@
                 <option value="completed">Completadas</option>
             </select>
         </div>
-        <div class="align-self-end">
+        <div class="d-flex align-items-end">
+            <button id="complete-all" class="btn btn-warning me-2">Completar Todas</button>
             <button id="clear-completed" class="btn btn-danger">Limpiar Completadas</button>
         </div>
+    </div>
+
+    <!-- Contador de tareas -->
+    <div class="mb-3 text-center">
+        <p>Pendientes: <span id="pending-count">0</span> | Completadas: <span id="completed-count">0</span></p>
     </div>
 
     <!-- Lista de tareas -->
@@ -82,17 +93,13 @@
         <ul id="task-list" class="list-group list-group-flush"></ul>
     </div>
 
-    <!-- Formulario para navegar -->
-    <form id="navigate-form" class="mb-4">
+    <!-- Formulario para comandos -->
+    <form id="command-form" class="mb-4">
         <div class="mb-3">
-            <label for="navigate-url" class="form-label">URL</label>
-            <input type="text" class="form-control" id="navigate-url" value="https://www.google.com" placeholder="Ingresa una URL">
+            <label for="command-input" class="form-label">Comando</label>
+            <input type="text" class="form-control" id="command-input" placeholder="Ejemplo: muestra los últimos 5 videos del usuario X en TikTok">
         </div>
-        <div class="mb-3">
-            <label for="navigate-query" class="form-label">Término de Búsqueda</label>
-            <input type="text" class="form-control" id="navigate-query" value="noticias" placeholder="Ingresa un término de búsqueda">
-        </div>
-        <button type="submit" class="btn btn-success w-100">Navegar</button>
+        <button type="submit" class="btn btn-success w-100">Ejecutar Comando</button>
     </form>
 
     <!-- Área de progreso -->
@@ -102,7 +109,6 @@
     </div>
 </div>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="app.js"></script>
 </body>

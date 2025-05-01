@@ -45,19 +45,20 @@ public class Tarea {
         this.fecha = fecha;
     }
 
+
+
     public boolean isCompletada() {
         return completada;
     }
 
-    public boolean setCompletada(boolean b) {
-        return completada=b;
+    public void setCompletada(boolean completada) {  // Cambiado a void
+        this.completada = completada;
     }
 
     public boolean isFavorita() {
-        return true;
+        return favorita;
     }
-
-    public void setFavorita(boolean b) {
-            this.favorita=true;
+    public void setFavorita(boolean favorita) {  // Cambiado a void
+        this.completada = completada;
     }
-}
+    }

@@ -1,5 +1,6 @@
 package com.taskgo.taskgo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,10 +8,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    @Autowired
+    private JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -18,18 +22,18 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/auth/login").permitAll()  // Permitir el endpoint de login
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/", "/index.html", "/app.js", "/static/**", "/resources/**", "/public/**").permitAll()
-                        .requestMatchers("/tareas", "/navegar").permitAll()
+                        .requestMatchers("/api/tareas", "/api/navegar").authenticated()  // Proteger estos endpoints
                         .anyRequest().authenticated()
                 )
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // Ignorar recursos estáticos para mejorar el rendimiento
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
