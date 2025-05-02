@@ -13,7 +13,7 @@ public class DisplayService {
     public void showVideo(String videoUrl, int currentVideo, int totalVideos) {
         try {
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("user-data-dir=/path/to/user/profile"); // Reemplaza con la ruta real
+            options.addArguments("user-data-dir=C:\\Users\\TuUsuario\\AppData\\Local\\Google\\Chrome\\User Data");
             options.addArguments("--start-maximized");
             options.addArguments("--disable-blink-features=AutomationControlled");
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});

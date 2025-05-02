@@ -20,7 +20,7 @@ public class NavigationService {
         try {
             // Configurar Chrome para evitar detección de bots
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("user-data-dir=/path/to/user/profile"); // Reemplaza con la ruta real del perfil de Chrome del usuario
+            options.addArguments("user-data-dir=C:\\Users\\TuUsuario\\AppData\\Local\\Google\\Chrome\\User Data");
             options.addArguments("--start-maximized");
             options.addArguments("--disable-blink-features=AutomationControlled"); // Oculta que es un navegador automatizado
             options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});

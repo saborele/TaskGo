@@ -58,7 +58,6 @@ public class Tarea {
     public boolean isFavorita() {
         return favorita;
     }
-    public void setFavorita(boolean favorita) {  // Cambiado a void
-        this.completada = completada;
-    }
-    }
+    public void setFavorita(boolean favorita) {
+        this.favorita = favorita;
+    }}
